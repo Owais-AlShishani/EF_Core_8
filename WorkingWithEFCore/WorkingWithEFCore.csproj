@@ -7,4 +7,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Using Include="System.Console" Static="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Version="5.2.0" Include="Microsoft.Data.SqlClient" />
+    <PackageReference Version="8.0.5" Include="Microsoft.EntityFrameworkCore.SqlServer" />
+  </ItemGroup>
+
 </Project>

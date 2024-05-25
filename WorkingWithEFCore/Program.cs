@@ -1,2 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using WorkingWithEFCore;
+
+NorthwindDb db=new();
+db.Database.EnsureCreated();
+WriteLine($"Provider {db.Database.ProviderName}");
