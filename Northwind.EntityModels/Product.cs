@@ -11,7 +11,7 @@ namespace Northwind.EntityModels
         [StringLength(40)]
         public string ProductName { get; set; } = null!;
 
-        [Column("Unit", TypeName = "money")]
+        [Column("UnitPrice", TypeName = "money")]
         public decimal? Cost { get; set; }
 
         [Column("UnitsInStock")]
