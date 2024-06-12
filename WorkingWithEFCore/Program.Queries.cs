@@ -114,7 +114,7 @@ namespace WorkingWithEFCore
 
             product = db.Products?
             .Single(product => product.ProductId == id);
-            // Single: even if it finds the Id it will still looking for another match so it can be sure there that is no duplication
+            // Single: even if it finds the Id it will still looking for another match so it can be sure that there is no duplication
 
             Info($"Single: {product?.ProductName}");
 
