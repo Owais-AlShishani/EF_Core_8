@@ -121,5 +121,50 @@ namespace WorkingWithEFCore
             if (product is null) Fail("No product found using Single.");
 
         }
+        public static void QueryingWithLike()
+        {
+            using NorthwindDb db = new();
+            SectionTitle("Pattern matching with LIKE");
+            Write("Enter part of a product name: ");
+            string? input = ReadLine();
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                Fail("You did not enter part of a product name.");
+                return;
+            }
+            IQueryable<Product>? products = db.Products?
+            .Where(p => EF.Functions.Like(p.ProductName, $"%{input}%"));
+            if (products is null || !products.Any())
+            {
+                Fail("No products found.");
+                return;
+            }
+            foreach (Product p in products)
+            {
+                WriteLine("{0} has {1} units in stock. Discontinued: {2}",
+                p.ProductName, p.Stock, p.Discontinued);
+            }
+        }
+        public static void GetRandomProduct()
+        {
+            using NorthwindDb db = new();
+            SectionTitle("Get a random product");
+
+            int? rowCount = db.Products?.Count();
+
+            if (rowCount is null)
+            {
+                Fail("Products table is empty.");
+                return;
+            }
+            Product? p = db.Products?.FirstOrDefault(
+            p => p.ProductId == (int)(EF.Functions.Random() * rowCount));
+            if (p is null)
+            {
+                Fail("Product not found.");
+                return;
+            }
+            WriteLine($"Random product: {p.ProductId} - {p.ProductName}");
+        }
     }
 }
