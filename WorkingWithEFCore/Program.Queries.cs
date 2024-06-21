@@ -10,8 +10,8 @@ namespace WorkingWithEFCore
             using NorthwindDb db = new();
             SectionTitle("Categories and how many products they have");
             // A query to get all categories and their related products.
-            IQueryable<Category>? categories = db.Categories?
-            .Include(c => c.Products);
+            IQueryable<Category>? categories = db.Categories;
+            //.Include(c => c.Products);
             if (categories is null || !categories.Any())
             {
                 Fail("No categories found.");
@@ -167,4 +167,18 @@ namespace WorkingWithEFCore
             WriteLine($"Random product: {p.ProductId} - {p.ProductName}");
         }
     }
+    //SELECT[p].[ProductId], [p].[CategoryId], [p].[UnitPrice], [p].[Discontinued], [p].[ProductName], [p].[UnitsInStock]
+    //FROM[Products] AS[p]
+    //  WHERE[p].[Discontinued] = CAST(0 AS bit) AND([p].[ProductName] LIKE @__Format_1)
+
+    //SELECT[p].[ProductId], [p].[CategoryId], [p].[UnitPrice], [p].[Discontinued], [p].[ProductName], [p].[UnitsInStock]
+    //FROM[Products] AS[p]
+    //  WHERE[p].[Discontinued] = CAST(0 AS bit) AND([p].[ProductName] LIKE @__Format_1)
+
+    //SELECT CASE
+    //      WHEN EXISTS(
+    //          SELECT 1
+    //          FROM[Products] AS [p]
+    //          WHERE [p].[Discontinued] = CAST(0 AS bit) AND ([p].[ProductName] LIKE @__Format_1)) THEN CAST(1 AS bit)
+    //      ELSE CAST(0 AS bit)
 }
