@@ -198,6 +198,24 @@ namespace WorkingWithEFCore
             }
             WriteLine($"Random product: {p.ProductId} - {p.ProductName}");
         }
+
+        public static void LazyLoadingWithNoTracking()
+        {
+            using NorthwindDb db = new();
+            SectionTitle("Lazy-loading with no tracking");
+            IQueryable<Product>? products = db.Products?.AsNoTracking();
+            if (products is null || !products.Any())
+            {
+                Fail("No products found.");
+                return;
+            }
+            foreach (Product p in products)
+            {
+                WriteLine("{0} is in category named {1}.",
+                p.ProductName, p.Category.CategoryName);
+            }
+        }
+
     }
     //SELECT[p].[ProductId], [p].[CategoryId], [p].[UnitPrice], [p].[Discontinued], [p].[ProductName], [p].[UnitsInStock]
     //FROM[Products] AS[p]

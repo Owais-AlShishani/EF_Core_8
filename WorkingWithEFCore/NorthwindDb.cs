@@ -30,8 +30,8 @@ namespace WorkingWithEFCore
             // builder.UserId = Environment.GetEnvironmentVariable("MY_SQL_USR");
             // builder.Password = Environment.GetEnvironmentVariable("MY_SQL_PWD");
 
-            string? connectionString = builder.ConnectionString;
-            //string? connectionString = "Data Source=.;Initial Catalog=Northwind;User Id=sa;Password=P@ssw0rd;Integrated Security=false;TrustServerCertificate=true;";
+            //string? connectionString = builder.ConnectionString;
+            string? connectionString = "Data Source=.;Initial Catalog=Northwind;User Id=sa;Password=P@ssw0rd;Integrated Security=false;TrustServerCertificate=true;";
             WriteLine($"Connection: {connectionString}");
             optionsBuilder.UseSqlServer(connectionString);
             optionsBuilder.LogTo(WriteLine, // This is the Console method.
